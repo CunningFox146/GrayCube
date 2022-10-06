@@ -2,7 +2,7 @@
 
 namespace GrayCube.Sound
 {
-    internal interface ISoundPlayer
+    public interface ISoundPlayer
     {
         public AudioSource PlaySound(SoundInfo soundName);
     }
