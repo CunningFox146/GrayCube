@@ -7,11 +7,14 @@ namespace GrayCube.Sound
 {
     public class SoundPlayer2D : MonoBehaviour, ISoundPlayer
     {
+        [SerializeField] private SoundInfo _startSound;
+
         private IObjectPool<AudioSource> _audioPool;
 
         private void Awake()
         {
             InitAudioPool();
+            PlayStartSound();
         }
 
         private void OnDestroy()
@@ -37,6 +40,14 @@ namespace GrayCube.Sound
             }
 
             return sound;
+        }
+
+        private void PlayStartSound()
+        {
+            if (_startSound is not null)
+            {
+                PlaySound(_startSound);
+            }
         }
 
         private void InitAudioPool()

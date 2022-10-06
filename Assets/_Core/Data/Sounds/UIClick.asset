@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsLoop>k__BackingField: 0
   <Volume>k__BackingField: 1
-  <Pitch>k__BackingField: 7.45
-  <PitchRange>k__BackingField: []
+  <Pitch>k__BackingField: 1
+  <PitchRange>k__BackingField:
+  - 0.9
+  - 1.1
   <MixerGroup>k__BackingField: {fileID: 24300002, guid: e29f26a4dd2374f40bb829d003690166, type: 2}
   <Clips>k__BackingField:
   - {fileID: 8300000, guid: e88dce2514db99d479b26bb6443b492a, type: 3}
