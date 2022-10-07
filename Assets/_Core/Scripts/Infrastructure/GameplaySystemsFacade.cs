@@ -1,4 +1,5 @@
-﻿using GrayCube.Input;
+﻿using GrayCube.Containers;
+using GrayCube.Input;
 using GrayCube.UI;
 using UnityEngine;
 
@@ -9,5 +10,6 @@ namespace GrayCube.Infrastructure
         [field: SerializeField] public Camera MainCamera { get; private set; }
         [field: SerializeField] public InputSystem Input { get; private set; }
         [field: SerializeField] public ViewSystem ViewSystem { get; private set; }
+        [field: SerializeField] public FillableSystem FillableSystem { get; internal set; }
     }
 }

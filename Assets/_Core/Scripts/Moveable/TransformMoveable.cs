@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GrayCube.Moveable
 {
@@ -7,7 +6,9 @@ namespace GrayCube.Moveable
     {
         [SerializeField] private float _moveSpeed;
 
+        protected bool _isMoveable = true;
         private bool _isMoving;
+        private Vector2 _startPos;
         private Vector2 _targetPos;
 
         protected virtual void Update()
@@ -15,13 +16,26 @@ namespace GrayCube.Moveable
             UpdateMovement();
         }
 
+        public bool GetIsMoveable() => _isMoveable;
+
         public virtual void Move(Vector2 position)
         {
             _targetPos = position;
         }
 
-        public virtual void StartMoving() => _isMoving = true;
+        public virtual void StartMoving()
+        {
+            _startPos = transform.position;
+            _isMoving = true;
+        }
+
         public virtual void StopMoving() => _isMoving = false;
+
+        public void ReturnToStartPos()
+        {
+            transform.position = _startPos;
+            _targetPos = _startPos;
+        }
 
         private void UpdateMovement()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrayCube.Infrastructure;
+using System;
 using UnityEngine;
 
 namespace GrayCube.Containers
@@ -8,7 +9,26 @@ namespace GrayCube.Containers
         public event Action Filled;
         public event Action Cleared;
 
+        private FillableSystem _fillableSystem;
+
         public IFiller Filler { get; private set; }
+
+        public virtual void Start()
+        {
+            _fillableSystem = GameplaySystemsFacade.Instance.FillableSystem;
+
+            _fillableSystem.RegisterFillable(this);
+        }
+
+        private void OnEnable()
+        {
+            _fillableSystem?.RegisterFillable(this);
+        }
+
+        private void OnDisable()
+        {
+            _fillableSystem.UnregisterFillable(this);
+        }
 
         public virtual void Fill(IFiller filler)
         {

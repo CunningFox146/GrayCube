@@ -24,7 +24,7 @@ namespace GrayCube.Moveable
         private IMoveable GetMoveableUnderPoint(Vector3 point)
         {
             var hit = Physics2D.Raycast(point, Vector2.zero, 0f, 1 << (int)Layers.Moveable);
-            if (hit && hit.transform.TryGetComponent(out IMoveable moveable))
+            if (hit && hit.transform.TryGetComponent(out IMoveable moveable) && moveable.GetIsMoveable())
             {
                 return moveable;
             }
