@@ -1,26 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GrayCube.Moveable
 {
-    internal class TransformMoveable : MonoBehaviour, IMoveable
+    public class TransformMoveable : MonoBehaviour, IMoveable
     {
         [SerializeField] private float _moveSpeed;
 
         private bool _isMoving;
         private Vector2 _targetPos;
 
-        private void Update()
+        protected virtual void Update()
         {
             UpdateMovement();
         }
 
-        public void Move(Vector2 position)
+        public virtual void Move(Vector2 position)
         {
             _targetPos = position;
         }
 
-        public void StartMoving() => _isMoving = true;
-        public void StopMoving() => _isMoving = false;
+        public virtual void StartMoving() => _isMoving = true;
+        public virtual void StopMoving() => _isMoving = false;
 
         private void UpdateMovement()
         {
