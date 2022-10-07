@@ -37,6 +37,12 @@ namespace GrayCube.UI
             return results;
         }
 
+        public Vector2 ScreenToCanvasPos(Vector2 pos)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform, pos, _canvas.worldCamera, out pos);
+            return _canvas.transform.TransformPoint(pos);
+        }
+
         public T GetView<T>() where T : View
         {
             var view = Views.Where(v => v is T).FirstOrDefault();

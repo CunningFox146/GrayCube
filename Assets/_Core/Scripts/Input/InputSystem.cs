@@ -25,7 +25,7 @@ namespace GrayCube.Input
         {
             var systems = GameplaySystemsFacade.Instance;
             _viewSystem = systems.ViewSystem;
-            _objectMover = new(this, systems.MainCamera);
+            _objectMover = new(this, _viewSystem);
             RegisterEventHandlers();
         }
 

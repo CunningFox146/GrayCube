@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace GrayCube.Slots
 {
-    public class MoveableSlotItem : TransformMoveable, ISlotItem
+    public class MoveableSlotItem : RectTransformMoveable, ISlotItem
     {
         public event Action ItemPutInSlot;
         public event Action Cleared;
 
         private SlotsSystem _slotsSystem;
+        private RectTransform Transform => transform as RectTransform;
 
         private void Start()
         {
@@ -25,9 +26,10 @@ namespace GrayCube.Slots
 
         public void OnPutInSlot(Slot slot)
         {
+            var slotRect = slot.transform as RectTransform;
             _isMoveable = false;
-            transform.SetParent(slot.transform);
-            transform.localPosition = Vector3.zero;
+            Transform.SetParent(slotRect);
+            Transform.anchoredPosition = Vector2.zero;
             ItemPutInSlot?.Invoke();
         }
 
@@ -35,7 +37,7 @@ namespace GrayCube.Slots
         {
             base.StopMoving();
 
-            var slot = _slotsSystem.GetSlotAtPoint(transform.position);
+            var slot = _slotsSystem.GetSlotAtPoint(Transform.anchoredPosition);
 
             if (slot is not null && !slot.IsFull)
             {

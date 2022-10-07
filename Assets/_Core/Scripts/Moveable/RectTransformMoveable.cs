@@ -2,7 +2,7 @@
 
 namespace GrayCube.Moveable
 {
-    public class TransformMoveable : MonoBehaviour, IMoveable
+    public class RectTransformMoveable : MonoBehaviour, IMoveable
     {
         [SerializeField] private float _moveSpeed;
 
@@ -11,12 +11,14 @@ namespace GrayCube.Moveable
         private Vector2 _startPos;
         private Vector2 _targetPos;
 
+        private RectTransform Transform => transform as RectTransform;
+
+        public bool GetIsMoveable() => _isMoveable;
+
         protected virtual void Update()
         {
             UpdateMovement();
         }
-
-        public bool GetIsMoveable() => _isMoveable;
 
         public virtual void Move(Vector2 position)
         {
@@ -25,20 +27,21 @@ namespace GrayCube.Moveable
 
         public virtual void StartMoving()
         {
-            _startPos = transform.position;
+            _startPos = Transform.anchoredPosition;
             _targetPos = _startPos;
             _isMoving = true;
         }
 
         public virtual void StopMoving() => _isMoving = false;
 
-        public void ReturnToStartPos() => transform.position = _startPos;
+        public void ReturnToStartPos() => Transform.anchoredPosition = _startPos;
 
         private void UpdateMovement()
         {
             if (_isMoving)
             {
-                transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * _moveSpeed);
+                var targetPos = new Vector3(_targetPos.x, _targetPos.y, transform.position.z);
+                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * _moveSpeed);
             }
         }
     }

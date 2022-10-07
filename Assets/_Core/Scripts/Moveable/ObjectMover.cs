@@ -1,21 +1,21 @@
 ﻿using GrayCube.Input;
+using GrayCube.UI;
 using GrayCube.Utils;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace GrayCube.Moveable
 {
     public class ObjectMover : IUpdateable
     {
+        private ViewSystem _viewSystem;
         private IInputSource _inputSource;
         private IMoveable _currentObject;
-        private Camera _camera;
 
-        private Vector3 WorldPoint => _camera.ScreenToWorldPoint(_inputSource.GetClickPosition());
-
-        public ObjectMover(IInputSource input, Camera camera)
+        public ObjectMover(IInputSource input, ViewSystem viewSystem)
         {
             _inputSource = input;
-            _camera = camera;
+            _viewSystem = viewSystem;
 
             _inputSource.ClickPerformed += OnClickPerformedHandler;
             _inputSource.ClickCancelled += OnClickCancelledHandler;
@@ -23,32 +23,32 @@ namespace GrayCube.Moveable
 
         private IMoveable GetMoveableUnderPoint(Vector3 point)
         {
-            var hit = Physics2D.Raycast(point, Vector2.zero, 0f, 1 << (int)Layers.Moveable);
-            if (hit && hit.transform.TryGetComponent(out IMoveable moveable) && moveable.GetIsMoveable())
+            var elements = _viewSystem.GetElementsAtPoint(point);
+            foreach (RaycastResult element in elements)
             {
-                return moveable;
+                if (element.gameObject.TryGetComponent(out IMoveable moveable))
+                {
+                    return moveable;
+                }
             }
             return null;
         }
 
         public void Update()
         {
-            _currentObject?.Move(WorldPoint);
+            _currentObject?.Move(_viewSystem.ScreenToCanvasPos(_inputSource.GetClickPosition()));
         }
 
         private void OnClickPerformedHandler()
         {
-            Debug.Log("OnClickPerformedHandler");
-            _currentObject = GetMoveableUnderPoint(WorldPoint);
+            _currentObject = GetMoveableUnderPoint(_inputSource.GetClickPosition());
             _currentObject?.StartMoving();
         }
 
         private void OnClickCancelledHandler()
         {
-            Debug.Log("OnClickCancelledHandler");
             _currentObject?.StopMoving();
             _currentObject = null;
         }
-
     }
 }
