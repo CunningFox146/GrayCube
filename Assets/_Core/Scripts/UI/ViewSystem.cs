@@ -11,6 +11,7 @@ namespace GrayCube.UI
     public class ViewSystem : MonoBehaviour
     {
         public event Action<View> OnViewShown;
+        public event Action<View> OnViewHidden;
 
         [SerializeField] private GraphicRaycaster _raycaster;
         [SerializeField] private Canvas _canvas;
@@ -39,7 +40,6 @@ namespace GrayCube.UI
         public T GetView<T>() where T : View
         {
             var view = Views.Where(v => v is T).FirstOrDefault();
-            OnViewShown?.Invoke(view);
             return view as T;
         }
 
@@ -51,6 +51,7 @@ namespace GrayCube.UI
         public View ShowView(View view)
         {
             view.Show();
+            OnViewShown?.Invoke(view);
             return view;
         }
 
@@ -62,6 +63,7 @@ namespace GrayCube.UI
         public View HideView(View view)
         {
             view.Hide();
+            OnViewHidden?.Invoke(view);
             return view;
         }
 
@@ -75,6 +77,12 @@ namespace GrayCube.UI
             var view = GetView<T>();
             return view is not null && view.GetIsActive();
         }
+
+        public List<View> GetVisibleViews()
+        {
+            return Views.FindAll(view => view.GetIsActive());
+        }
+
         private void RegisterViews()
         {
             Views = new();
