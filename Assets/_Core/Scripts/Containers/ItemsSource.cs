@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
-namespace GrayCube.Containers
+namespace GrayCube.Slots
 {
     public class ItemsSource : MonoBehaviour
     {

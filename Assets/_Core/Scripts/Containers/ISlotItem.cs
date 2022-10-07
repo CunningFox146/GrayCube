@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GrayCube.Containers
+namespace GrayCube.Slots
 {
     public interface ISlotItem
     {

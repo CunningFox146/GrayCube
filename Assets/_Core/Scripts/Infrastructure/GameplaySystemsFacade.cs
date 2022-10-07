@@ -1,4 +1,4 @@
-﻿using GrayCube.Containers;
+﻿using GrayCube.Slots;
 using GrayCube.Input;
 using GrayCube.UI;
 using UnityEngine;

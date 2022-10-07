@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace GrayCube.Containers
+namespace GrayCube.Slots
 {
     public class Slot : MonoBehaviour
     {

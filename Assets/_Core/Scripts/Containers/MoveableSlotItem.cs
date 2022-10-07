@@ -3,7 +3,7 @@ using GrayCube.Moveable;
 using System;
 using UnityEngine;
 
-namespace GrayCube.Containers
+namespace GrayCube.Slots
 {
     public class MoveableSlotItem : TransformMoveable, ISlotItem
     {
