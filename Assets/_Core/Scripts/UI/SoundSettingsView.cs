@@ -43,7 +43,7 @@ namespace GrayCube.UI
 
         private void OnCloseClickedHandler()
         {
-            Hide();
+            ViewSystem.HideView(this);
         }
 
         private void PercentageChangedHandler(float percentage)

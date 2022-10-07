@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GrayCube.Infrastructure;
+using GrayCube.UI;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,10 +12,17 @@ namespace GrayCube.Input
         public event Action ClickCancelled;
 
         private GameplayInput _gameplayInput;
+        private ViewSystem _viewSystem;
+        private bool _isClickDown;
 
         private void Awake()
         {
             InitializeInputSystem();
+        }
+
+        private void Start()
+        {
+            _viewSystem = GameplaySystemsFacade.Instance.ViewSystem;
         }
 
         private void OnEnable()
@@ -32,8 +41,22 @@ namespace GrayCube.Input
         }
 
         public Vector2 GetClickPosition() => _gameplayInput.Gameplay.ClickPosition.ReadValue<Vector2>();
-        private void OnClickPerformedHandler(InputAction.CallbackContext _) => ClickPerformed?.Invoke();
-        private void OnClickCancelledHandler(InputAction.CallbackContext _) => ClickCancelled?.Invoke();
+
+        private void OnClickCancelledHandler(InputAction.CallbackContext _)
+        {
+            if (!_isClickDown) return;
+            Debug.Log("OnClickCancelledHandler");
+            _isClickDown = false;
+            ClickCancelled?.Invoke();
+        }
+
+        private void OnClickPerformedHandler(InputAction.CallbackContext _)
+        {
+            if (_viewSystem.IsPointerOnUI(GetClickPosition())) return;
+            Debug.Log("OnClickPerformedHandler");
+            _isClickDown = true;
+            ClickPerformed?.Invoke();
+        }
 
         private void InitializeInputSystem()
         {

@@ -395,6 +395,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256694583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5315767539965641127, guid: 0ca9a7c2f66e93c4a8a8072d5d2e506c, type: 3}
+  m_PrefabInstance: {fileID: 6984080099440590966}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3d286d79f6eca4f8f6d34939acb715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1366511229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -609,7 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb4e826d6ebf9c4eaf34e88647c41c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Input>k__BackingField: {fileID: 0}
+  <Input>k__BackingField: {fileID: 2087667934}
+  <ViewSystem>k__BackingField: {fileID: 1256694583}
 --- !u!1001 &6984080099440590966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,7 +631,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 810561708, guid: 0ca9a7c2f66e93c4a8a8072d5d2e506c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.9609649
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6984080098973947982, guid: 0ca9a7c2f66e93c4a8a8072d5d2e506c, type: 3}
       propertyPath: m_Name
