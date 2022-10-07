@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MainTheme
   m_EditorClassIdentifier: 
   <IsLoop>k__BackingField: 1
-  <Volume>k__BackingField: 1
-  <Pitch>k__BackingField: 1
+  <Volume>k__BackingField: 0.3
+  <FixedPitch>k__BackingField: 1
   <PitchRange>k__BackingField: []
   <MixerGroup>k__BackingField: {fileID: 24300002, guid: e29f26a4dd2374f40bb829d003690166, type: 2}
   <Clips>k__BackingField:

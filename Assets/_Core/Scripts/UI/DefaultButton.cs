@@ -10,11 +10,13 @@ namespace GrayCube.UI
         [SerializeField] protected SoundInfo _clickSound;
         protected ISoundPlayer _soundPlayer;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
-
-            _soundPlayer = MainSystemsFacade.Instance.SoundPlayer;
+            base.Start();
+            if (Application.isPlaying)
+            {
+                _soundPlayer = MainSystemsFacade.Instance.SoundPlayer;
+            }
         }
 
         protected override void OnEnable()
