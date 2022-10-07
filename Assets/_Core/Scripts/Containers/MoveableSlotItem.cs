@@ -5,41 +5,41 @@ using UnityEngine;
 
 namespace GrayCube.Containers
 {
-    public class MoveableFiller : TransformMoveable, IFiller
+    public class MoveableSlotItem : TransformMoveable, ISlotItem
     {
-        public event Action Filled;
+        public event Action ItemPutInSlot;
         public event Action Cleared;
 
-        private FillableSystem _fillableSystem;
+        private SlotsSystem _slotsSystem;
 
         private void Start()
         {
-            _fillableSystem = GameplaySystemsFacade.Instance.FillableSystem;
+            _slotsSystem = GameplaySystemsFacade.Instance.SlotsSystem;
         }
 
-        public void OnCleared(Fillable fillable)
+        public void OnCleared()
         {
             Destroy(gameObject);
             Cleared?.Invoke();
         }
 
-        public void OnFilled(Fillable fillable)
+        public void OnPutInSlot(Slot slot)
         {
             _isMoveable = false;
-            transform.SetParent(fillable.transform);
+            transform.SetParent(slot.transform);
             transform.localPosition = Vector3.zero;
-            Filled?.Invoke();
+            ItemPutInSlot?.Invoke();
         }
 
         public override void StopMoving()
         {
             base.StopMoving();
 
-            var fillable = _fillableSystem.GetFillableAtPoint(transform.position);
+            var slot = _slotsSystem.GetSlotAtPoint(transform.position);
 
-            if (fillable is not null)
+            if (slot is not null && !slot.IsFull)
             {
-                fillable.Fill(this);
+                slot.PutItem(this);
             }
             else
             {

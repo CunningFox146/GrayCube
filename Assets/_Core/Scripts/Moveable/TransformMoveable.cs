@@ -26,16 +26,13 @@ namespace GrayCube.Moveable
         public virtual void StartMoving()
         {
             _startPos = transform.position;
+            _targetPos = _startPos;
             _isMoving = true;
         }
 
         public virtual void StopMoving() => _isMoving = false;
 
-        public void ReturnToStartPos()
-        {
-            transform.position = _startPos;
-            _targetPos = _startPos;
-        }
+        public void ReturnToStartPos() => transform.position = _startPos;
 
         private void UpdateMovement()
         {

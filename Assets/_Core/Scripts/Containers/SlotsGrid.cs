@@ -2,7 +2,7 @@
 
 namespace GrayCube.Containers
 {
-    public class FillableGrid : MonoBehaviour
+    public class SlotsGrid : MonoBehaviour
     {
     }
 }
