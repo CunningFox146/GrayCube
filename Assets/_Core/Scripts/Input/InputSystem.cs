@@ -1,4 +1,5 @@
 ﻿using GrayCube.Infrastructure;
+using GrayCube.Moveable;
 using GrayCube.UI;
 using System;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace GrayCube.Input
         public event Action ClickPerformed;
         public event Action ClickCancelled;
 
+        private ObjectMover _objectMover;
         private GameplayInput _gameplayInput;
         private ViewSystem _viewSystem;
         private bool _isClickDown;
@@ -22,7 +24,14 @@ namespace GrayCube.Input
 
         private void Start()
         {
-            _viewSystem = GameplaySystemsFacade.Instance.ViewSystem;
+            var systems = GameplaySystemsFacade.Instance;
+            _viewSystem = systems.ViewSystem;
+            _objectMover = new(this, systems.MainCamera);
+        }
+
+        private void Update()
+        {
+            _objectMover.Update();
         }
 
         private void OnEnable()
@@ -45,7 +54,7 @@ namespace GrayCube.Input
         private void OnClickCancelledHandler(InputAction.CallbackContext _)
         {
             if (!_isClickDown) return;
-            Debug.Log("OnClickCancelledHandler");
+
             _isClickDown = false;
             ClickCancelled?.Invoke();
         }
@@ -53,7 +62,7 @@ namespace GrayCube.Input
         private void OnClickPerformedHandler(InputAction.CallbackContext _)
         {
             if (_viewSystem.IsPointerOnUI(GetClickPosition())) return;
-            Debug.Log("OnClickPerformedHandler");
+
             _isClickDown = true;
             ClickPerformed?.Invoke();
         }

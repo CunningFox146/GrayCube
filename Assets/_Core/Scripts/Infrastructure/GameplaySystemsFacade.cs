@@ -6,6 +6,7 @@ namespace GrayCube.Infrastructure
 {
     public class GameplaySystemsFacade : Singleton<GameplaySystemsFacade>
     {
+        [field: SerializeField] public Camera MainCamera { get; private set; }
         [field: SerializeField] public InputSystem Input { get; private set; }
         [field: SerializeField] public ViewSystem ViewSystem { get; private set; }
     }
