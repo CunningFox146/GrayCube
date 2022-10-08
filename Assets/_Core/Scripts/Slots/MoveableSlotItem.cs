@@ -1,5 +1,6 @@
 ﻿using GrayCube.Infrastructure;
 using GrayCube.Moveable;
+using GrayCube.Save;
 using System;
 using UnityEngine;
 
@@ -10,13 +11,17 @@ namespace GrayCube.Slots
         public event Action ItemPutInSlot;
         public event Action Cleared;
 
+        [SerializeField] private SlotItemId _id;
         private SlotsSystem _slotsSystem;
-        private RectTransform Transform => transform as RectTransform;
 
+        private RectTransform Transform => transform as RectTransform;
+        
         private void Start()
         {
             _slotsSystem = GameplaySystemsFacade.Instance.SlotsSystem;
         }
+
+        public SlotItemId GetId() => _id;
 
         public void OnCleared()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrayCube.Save;
+using System;
 
 namespace GrayCube.Slots
 {
@@ -9,5 +10,6 @@ namespace GrayCube.Slots
 
         public void OnPutInSlot(Slot slot);
         public void OnCleared();
+        public SlotItemId GetId();
     }
 }

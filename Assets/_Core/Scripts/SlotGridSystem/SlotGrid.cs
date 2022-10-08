@@ -1,6 +1,6 @@
 ﻿using GrayCube.Infrastructure;
+using GrayCube.Save;
 using GrayCube.Slots;
-using System;
 using UnityEngine;
 
 namespace GrayCube.SlotGridSystem
@@ -13,12 +13,14 @@ namespace GrayCube.SlotGridSystem
         private Slot[,] _slots;
         private IGridTracker _tracker;
         private bool _initialized = false;
+        private SaveSystem _save;
 
         private RectTransform Transform => transform as RectTransform;
         public Vector2Int GridSize => _layout.GridSize;
 
         private void Awake()
         {
+            _save = MainSystemsFacade.Instance.SaveSystem;
             InitSlots();
         }
 
@@ -31,6 +33,11 @@ namespace GrayCube.SlotGridSystem
         private void OnDestroy()
         {
             UnregisterAllSlots();
+        }
+
+        private void OnApplicationQuit()
+        {
+            SaveGrid();
         }
 
         private void InitSlots()
@@ -56,6 +63,37 @@ namespace GrayCube.SlotGridSystem
 
         private void LoadItems()
         {
+            var savedItems = _save.GetGridItems();
+            if (savedItems != null)
+            {
+                LoadItemsFromSave(savedItems);
+            }
+            else
+            {
+                LoadItemsFromLayout();
+            }
+
+            _initialized = true;
+        }
+
+        private void LoadItemsFromSave(GameObject[,] savedItems)
+        {
+            for (int x = 0; x < GridSize.x; x++)
+            {
+                for (int y = 0; y < GridSize.y; y++)
+                {
+                    var slot = _slots[x, y];
+                    var item = savedItems[x, y];
+                    if (item != null)
+                    {
+                        slot.PutItem(Instantiate(item, slot.transform).GetComponent<ISlotItem>());
+                    }
+                }
+            }
+        }
+
+        private void LoadItemsFromLayout()
+        {
             var items = _layout.StartSlotItems;
             if (items is null) return;
 
@@ -73,8 +111,6 @@ namespace GrayCube.SlotGridSystem
                     slot.PutItem(Instantiate(item, slot.transform).GetComponent<ISlotItem>());
                 }
             }
-
-            _initialized = true;
         }
 
         private Vector2Int GetSlotIndex(Slot slot)
@@ -134,6 +170,19 @@ namespace GrayCube.SlotGridSystem
             {
                 _slots[columnX, y].Clear();
             }
+        }
+
+        private void SaveGrid()
+        {
+            var items = new ISlotItem[GridSize.x, GridSize.y];
+            for (int x = 0; x < GridSize.x; x++)
+            {
+                for (int y = 0; y < GridSize.y; y++)
+                {
+                    items[x, y] = _slots[x, y].Item;
+                }
+            }
+            _save.SetGridItems(items);
         }
 
         private void RegisterSlot(Slot slot)

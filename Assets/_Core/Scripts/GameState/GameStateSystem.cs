@@ -1,4 +1,5 @@
 ﻿using GrayCube.Infrastructure;
+using GrayCube.Save;
 using GrayCube.SlotGridSystem;
 using GrayCube.UI;
 using GrayCube.Utils;
@@ -13,12 +14,14 @@ namespace GrayCube.GameState
         public event Action OnGameLost;
 
         private ViewSystem _viewSystem;
+        private SaveSystem _saveSystem;
 
         public bool IsGamePlay { get; private set; } = true;
 
         private void Start()
         {
             _viewSystem = GameplaySystemsFacade.Instance.ViewSystem;
+            _saveSystem = MainSystemsFacade.Instance.SaveSystem;
         }
 
         public void OnRowPopped(int row)
@@ -49,6 +52,7 @@ namespace GrayCube.GameState
         {
             IsGamePlay = false;
             OnGameWon?.Invoke();
+            _saveSystem.ClearPockets();
 
             this.DelayAction(1f, () =>
             {
@@ -65,6 +69,8 @@ namespace GrayCube.GameState
             var view = _viewSystem.GetView<GameEndView>();
             view.SetupLost();
             _viewSystem.ShowView(view);
+
+            _saveSystem.ClearPockets();
         }
     }
 }
