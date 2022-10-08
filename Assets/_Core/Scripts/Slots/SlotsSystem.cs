@@ -20,12 +20,8 @@ namespace GrayCube.Slots
 
         public Slot GetSlotAtPoint(Vector3 pos)
         {
-            //Debug.Log(pos);
             foreach (Slot slot in _slots)
             {
-
-                //Debug.Log($"[{slot.name}]: {((RectTransform)slot.transform).position}");
-
                 var distance = ((RectTransform)slot.transform).position - pos;
 
                 if (Mathf.Abs(distance.x) <= _slotSize

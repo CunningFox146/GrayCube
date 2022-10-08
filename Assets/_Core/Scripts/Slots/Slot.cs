@@ -6,8 +6,8 @@ namespace GrayCube.Slots
 {
     public class Slot : MonoBehaviour
     {
-        public event Action Filled;
-        public event Action Cleared;
+        public event Action<Slot> Filled;
+        public event Action<Slot> Cleared;
 
         private SlotsSystem _slotsSystem;
 
@@ -38,7 +38,7 @@ namespace GrayCube.Slots
 
             Item = item;
             Item.OnPutInSlot(this);
-            Filled?.Invoke();
+            Filled?.Invoke(this);
         }
 
         public virtual void Clear()
@@ -47,7 +47,7 @@ namespace GrayCube.Slots
 
             Item.OnCleared();
             Item = null;
-            Cleared?.Invoke();
+            Cleared?.Invoke(this);
         }
     }
 }
