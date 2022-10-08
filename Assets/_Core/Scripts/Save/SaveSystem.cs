@@ -1,5 +1,6 @@
 ﻿using GrayCube.GameState;
 using GrayCube.Slots;
+using System.Collections;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -10,10 +11,12 @@ namespace GrayCube.Save
     public class SaveSystem : MonoBehaviour, ISaver
     {
         [SerializeField] private SlotItemData _itemData;
+        [SerializeField] private float _savePeriod;
 
         private GameSave _currentSave;
         private IGameState _gameState;
         private string _filePath;
+        private Coroutine _saveCoroutine;
 
         public float Volume
         {
@@ -28,6 +31,7 @@ namespace GrayCube.Save
         {
             _filePath = $"{Application.persistentDataPath}/GameData" + (Application.isEditor ? "_DEV" : string.Empty) + ".bytes";
             Load();
+            _saveCoroutine = StartCoroutine(SaveCoroutine());
         }
 
         private void OnDestroy()
@@ -94,6 +98,15 @@ namespace GrayCube.Save
         {
             SetPocketItem(null);
             SetGridItems(null);
+        }
+
+        private IEnumerator SaveCoroutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(_savePeriod);
+                Save();
+            }
         }
     }
 }

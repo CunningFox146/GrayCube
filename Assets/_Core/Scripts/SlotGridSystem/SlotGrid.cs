@@ -35,11 +35,6 @@ namespace GrayCube.SlotGridSystem
             UnregisterAllSlots();
         }
 
-        private void OnApplicationQuit()
-        {
-            SaveGrid();
-        }
-
         private void InitSlots()
         {
             _slots = new Slot[GridSize.x, GridSize.y];
@@ -205,6 +200,7 @@ namespace GrayCube.SlotGridSystem
 
         private void OnSlotFilledHandler(Slot slot)
         {
+            SaveGrid();
             CheckShouldPop(GetSlotIndex(slot));
             if (_initialized)
             {

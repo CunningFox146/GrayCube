@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemData: {fileID: 11400000, guid: 2132da481ad9a3a4a93c4912ea27f4ca, type: 2}
+  _savePeriod: 5
 --- !u!1 &2229280725136226676
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,17 @@ namespace GrayCube.Slots
             LoadPocketItem();
         }
 
-        private void OnApplicationQuit()
+        private void OnEnable()
+        {
+            RegisterEventHandlers();
+        }
+
+        private void OnDisable()
+        {
+            UnregisterEventHandlers();
+        }
+
+        private void OnItemFilledHandler(Slot _)
         {
             SavePocket();
         }
@@ -31,5 +41,16 @@ namespace GrayCube.Slots
         {
             _saveSystem.SetPocketItem(Item);
         }
+
+        private void RegisterEventHandlers()
+        {
+            Filled += OnItemFilledHandler;
+        }
+
+        private void UnregisterEventHandlers()
+        {
+            Filled -= OnItemFilledHandler;
+        }
+
     }
 }
