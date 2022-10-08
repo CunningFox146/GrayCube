@@ -11,6 +11,7 @@ namespace GrayCube.Slots
 
         private SlotsSystem _slotsSystem;
 
+        [field: SerializeField] public bool IsItemDraggable { get; private set; }
         public ISlotItem Item { get; private set; }
         public bool IsFull => Item is not null;
 

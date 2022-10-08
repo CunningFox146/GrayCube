@@ -27,7 +27,7 @@ namespace GrayCube.Slots
         public void OnPutInSlot(Slot slot)
         {
             var slotRect = slot.transform as RectTransform;
-            _isMoveable = false;
+            _isMoveable = slot.IsItemDraggable;
             Transform.SetParent(slotRect);
             Transform.anchoredPosition = Vector2.zero;
             ItemPutInSlot?.Invoke();
