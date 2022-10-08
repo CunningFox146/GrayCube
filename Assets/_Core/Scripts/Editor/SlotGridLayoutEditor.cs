@@ -52,11 +52,7 @@ namespace GrayCube.Editors
                 GUILayout.EndHorizontal();
             }
 
-            if (serializedObject.ApplyModifiedProperties())
-            foreach(var item in _target.StartSlotItems)
-            {
-                Debug.Log(item);
-            }
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

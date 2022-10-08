@@ -1,4 +1,5 @@
-﻿using GrayCube.Slots;
+﻿using GrayCube.Infrastructure;
+using GrayCube.Slots;
 using System;
 using UnityEngine;
 
@@ -6,13 +7,12 @@ namespace GrayCube.SlotGridSystem
 {
     public class SlotGrid : MonoBehaviour
     {
-        public event Action<int> RowPopped;
-        public event Action<int> ColumnPopped;
-
         [SerializeField] private SlotGridLayout _layout;
         [SerializeField] private Slot _slotPrefab;
         [SerializeField] private float _spacing = 1f;
         private Slot[,] _slots;
+        private IGridTracker _tracker;
+        private bool _initialized = false;
 
         private RectTransform Transform => transform as RectTransform;
         public Vector2Int GridSize => _layout.GridSize;
@@ -24,7 +24,7 @@ namespace GrayCube.SlotGridSystem
 
         private void Start()
         {
-
+            _tracker = GameplaySystemsFacade.Instance.GameState;
             LoadItems();
         }
 
@@ -73,6 +73,8 @@ namespace GrayCube.SlotGridSystem
                     slot.PutItem(Instantiate(item, slot.transform).GetComponent<ISlotItem>());
                 }
             }
+
+            _initialized = true;
         }
 
         private Vector2Int GetSlotIndex(Slot slot)
@@ -118,7 +120,7 @@ namespace GrayCube.SlotGridSystem
 
         private void PopRow(int rowY)
         {
-            RowPopped?.Invoke(rowY);
+            _tracker.OnRowPopped(rowY);
             for (int x = 0; x < GridSize.x; x++)
             {
                 _slots[x, rowY].Clear();
@@ -127,7 +129,7 @@ namespace GrayCube.SlotGridSystem
 
         private void PopColumn(int columnX)
         {
-            ColumnPopped?.Invoke(columnX);
+            _tracker.OnColumnPopped(columnX);
             for (int y = 0; y < GridSize.y; y++)
             {
                 _slots[columnX, y].Clear();
@@ -155,6 +157,10 @@ namespace GrayCube.SlotGridSystem
         private void OnSlotFilledHandler(Slot slot)
         {
             CheckShouldPop(GetSlotIndex(slot));
+            if (_initialized)
+            {
+                _tracker.OnItemPut();
+            }
         }
     }
 }
