@@ -1,4 +1,7 @@
+using GrayCube.Infrastructure;
+using GrayCube.Sound;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace GrayCube.UI
@@ -7,20 +10,18 @@ namespace GrayCube.UI
     {
         [SerializeField] private Button _closeButton;
         [SerializeField] private PercentageSlider _soundSlider;
+        private AudioMixerSystem _audioMixerSystem;
 
-        private void Start()
-        {
-            // Register
-        }
 
         public override void Show()
         {
             base.Show();
-            // load percent
+            _soundSlider.SetPercent(_audioMixerSystem.Volume);
         }
 
         private void OnEnable()
         {
+            _audioMixerSystem = MainSystemsFacade.Instance.AudioMixerSystem;
             RegisterEventHandlers();
         }
 
@@ -48,7 +49,7 @@ namespace GrayCube.UI
 
         private void PercentageChangedHandler(float percentage)
         {
-            Debug.Log(percentage);
+            _audioMixerSystem.Volume = percentage;
         }
     }
 }

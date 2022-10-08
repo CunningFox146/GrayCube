@@ -9,7 +9,7 @@ namespace GrayCube.Save
     {
         public SlotItemId[,] _savedItems { get; set; }
         public SlotItemId _pocketItem { get; set; }
-        public float Volume { get; set; }
+        public float Volume { get; set; } = 1f;
 
         public GameObject[,] GetGridItems(SlotItemData itemData)
         {
@@ -51,7 +51,6 @@ namespace GrayCube.Save
                     _savedItems[x, y] = item.GetId();
                 }
             }
-
         }
 
         public void SetPocketItem(ISlotItem item)

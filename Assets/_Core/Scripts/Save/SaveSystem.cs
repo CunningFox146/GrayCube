@@ -1,5 +1,4 @@
 ﻿using GrayCube.GameState;
-using GrayCube.Infrastructure;
 using GrayCube.Slots;
 using System.IO;
 using System.Runtime.Serialization;
@@ -15,6 +14,15 @@ namespace GrayCube.Save
         private GameSave _currentSave;
         private IGameState _gameState;
         private string _filePath;
+
+        public float Volume
+        {
+            get => _currentSave != null ? _currentSave.Volume : 1f;
+            set
+            {
+                _currentSave.Volume = value;
+            }
+        }
 
         private void Awake()
         {

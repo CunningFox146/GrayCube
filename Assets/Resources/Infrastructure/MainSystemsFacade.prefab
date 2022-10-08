@@ -45,6 +45,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemData: {fileID: 11400000, guid: 2132da481ad9a3a4a93c4912ea27f4ca, type: 2}
+--- !u!1 &2229280725136226676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7249769124904096681}
+  - component: {fileID: 6677127030239041267}
+  m_Layer: 0
+  m_Name: AudioMixerSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7249769124904096681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229280725136226676}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8362029150186199255}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6677127030239041267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229280725136226676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4489106d67ac14446bcdd1160b85e9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: e29f26a4dd2374f40bb829d003690166, type: 2}
 --- !u!1 &6299061309559732863
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +166,7 @@ Transform:
   - {fileID: 8362029150347195573}
   - {fileID: 386637026020618055}
   - {fileID: 2576092572722649714}
+  - {fileID: 7249769124904096681}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -138,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SceneSystem>k__BackingField: {fileID: 5868198099661552803}
   <SaveSystem>k__BackingField: {fileID: 6109045015785189917}
+  <AudioMixerSystem>k__BackingField: {fileID: 6677127030239041267}
 --- !u!1 &8362029150347195579
 GameObject:
   m_ObjectHideFlags: 0
