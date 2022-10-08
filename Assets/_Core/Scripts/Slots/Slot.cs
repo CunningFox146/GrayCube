@@ -35,7 +35,6 @@ namespace GrayCube.Slots
         public virtual void PutItem(ISlotItem item)
         {
             if (item is null || Item is not null) return;
-
             Item = item;
             Item.OnPutInSlot(this);
             Filled?.Invoke(this);

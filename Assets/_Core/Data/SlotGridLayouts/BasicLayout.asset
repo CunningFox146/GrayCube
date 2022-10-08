@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18305fde79f21d54888c2a2ee363122f, type: 3}
+  m_Name: BasicLayout
+  m_EditorClassIdentifier: 
+  _startSlotItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 5594450953795881346, guid: cccb55e9648a93e40ba1d0b8fa15f333, type: 3}
+  - {fileID: 0}
+  - {fileID: 5594450953795881346, guid: cccb55e9648a93e40ba1d0b8fa15f333, type: 3}
+  <GridSize>k__BackingField: {x: 3, y: 3}

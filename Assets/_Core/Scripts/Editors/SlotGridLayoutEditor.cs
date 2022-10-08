@@ -1,19 +1,20 @@
 ﻿using GrayCube.SlotGridSystem;
+using GrayCube.Slots;
 using UnityEditor;
 using UnityEngine;
 
 namespace GrayCube.Editors
 {
-    [CustomEditor(typeof(SlotGrid))]
-    public class SlotGridEditor : Editor
+    [CustomEditor(typeof(SlotGridLayout))]
+    public class SlotGridLayoutEditor : Editor
     {
-        private SlotGrid _target;
+        private SlotGridLayout _target;
         private SerializedProperty _startSlotItems;
         private bool _showStartSlots;
 
         private void Awake()
         {
-            _target = target as SlotGrid;
+            _target = target as SlotGridLayout;
         }
 
         private void OnEnable()
@@ -37,11 +38,25 @@ namespace GrayCube.Editors
                 {
                     int pos = x + y * _target.GridSize.x;
                     var element = _startSlotItems.GetArrayElementAtIndex(pos);
-                    element.objectReferenceValue = EditorGUILayout.ObjectField(element.objectReferenceValue, typeof(GameObject), true) as GameObject;
+                    var newElement = EditorGUILayout.ObjectField(element.objectReferenceValue, typeof(GameObject), true) as GameObject;
+
+                    if (newElement is not null && newElement.GetComponent<ISlotItem>() is null)
+                    {
+                        Debug.LogWarning($"{newElement} does not implement ISlotItem");
+                    }
+                    else
+                    {
+                        element.objectReferenceValue = newElement;
+                    }
                 }
                 GUILayout.EndHorizontal();
             }
-            serializedObject.ApplyModifiedProperties();
+
+            if (serializedObject.ApplyModifiedProperties())
+            foreach(var item in _target.StartSlotItems)
+            {
+                Debug.Log(item);
+            }
         }
     }
 }
