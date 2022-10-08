@@ -5,9 +5,10 @@ namespace GrayCube.Moveable
 {
     public interface IMoveable
     {
+        public event Action StartMoving;
         public bool GetIsMoveable();
-        public void StartMoving();
-        public void StopMoving();
+        public void OnStartMoving();
+        public void OnStopMoving();
         public void Move(Vector2 position);
     }
 }

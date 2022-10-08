@@ -1,6 +1,7 @@
 ﻿using GrayCube.Infrastructure;
 using GrayCube.Save;
 using GrayCube.SlotGridSystem;
+using GrayCube.Sound;
 using GrayCube.UI;
 using GrayCube.Utils;
 using System;
@@ -13,15 +14,21 @@ namespace GrayCube.GameState
         public event Action OnGameWon;
         public event Action OnGameLost;
 
+        [SerializeField] private SoundInfo _winSound;
+        [SerializeField] private SoundInfo _looseSound;
+
         private ViewSystem _viewSystem;
         private SaveSystem _saveSystem;
+        private ISoundPlayer _soundPlayer;
 
         public bool IsGamePlay { get; private set; } = true;
 
         private void Start()
         {
+            var mainSystems = MainSystemsFacade.Instance;
+            _saveSystem = mainSystems.SaveSystem;
+            _soundPlayer = mainSystems.SoundPlayer;
             _viewSystem = GameplaySystemsFacade.Instance.ViewSystem;
-            _saveSystem = MainSystemsFacade.Instance.SaveSystem;
         }
 
         public void OnRowPopped(int row)
@@ -56,6 +63,7 @@ namespace GrayCube.GameState
 
             this.DelayAction(1f, () =>
             {
+                _soundPlayer.PlaySound(_winSound);
                 var view = _viewSystem.GetView<GameEndView>();
                 view.SetupWin();
                 _viewSystem.ShowView(view);
@@ -69,7 +77,7 @@ namespace GrayCube.GameState
             var view = _viewSystem.GetView<GameEndView>();
             view.SetupLost();
             _viewSystem.ShowView(view);
-
+            _soundPlayer.PlaySound(_looseSound);
             _saveSystem.ClearPockets();
         }
     }

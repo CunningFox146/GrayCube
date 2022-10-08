@@ -1,15 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GrayCube.Moveable
 {
     public class RectTransformMoveable : MonoBehaviour, IMoveable
     {
+        public event Action StartMoving;
+
         [SerializeField] private float _moveSpeed;
 
         protected bool _isMoveable = true;
         private bool _isMoving;
         private Vector2 _startPos;
         private Vector2 _targetPos;
+
 
         private RectTransform Transform => transform as RectTransform;
 
@@ -25,14 +29,15 @@ namespace GrayCube.Moveable
             _targetPos = position;
         }
 
-        public virtual void StartMoving()
+        public virtual void OnStartMoving()
         {
+            StartMoving?.Invoke();
             _startPos = Transform.anchoredPosition;
             _targetPos = transform.position;
             _isMoving = true;
         }
 
-        public virtual void StopMoving() => _isMoving = false;
+        public virtual void OnStopMoving() => _isMoving = false;
 
         public void ReturnToStartPos() => Transform.anchoredPosition = _startPos;
 

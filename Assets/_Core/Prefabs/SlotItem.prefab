@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5594450953795881358}
   - component: {fileID: 5594450953795881359}
   - component: {fileID: 5594450953795881353}
+  - component: {fileID: -7273898429440415720}
   m_Layer: 5
   m_Name: SlotItem
   m_TagString: Untagged
@@ -91,3 +92,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 50
   _id: 1
+--- !u!114 &-7273898429440415720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594450953795881346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89535cdfe1f6e2d48bd8b48cc8b62f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startMovingSound: {fileID: 11400000, guid: 6ed7762f93ba6ae4c9a1c127c741757d, type: 2}
+  _putInSlotSound: {fileID: 11400000, guid: 369a47f45c2532940a9cc85e021be155, type: 2}
+  _clearedSound: {fileID: 11400000, guid: ba820cb20815dc14f8ebaffd2dd43588, type: 2}

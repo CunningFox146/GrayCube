@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e6d01cd8d55ff74ca30ae2420903989, type: 3}
+  m_Name: PickUpSlot
+  m_EditorClassIdentifier: 
+  <IsLoop>k__BackingField: 0
+  <Volume>k__BackingField: 1
+  <FixedPitch>k__BackingField: 1
+  <PitchRange>k__BackingField: []
+  <MixerGroup>k__BackingField: {fileID: 24300002, guid: e29f26a4dd2374f40bb829d003690166, type: 2}
+  <Clips>k__BackingField:
+  - {fileID: 8300000, guid: 29ab79040de76ac468ad20b7afcaf9aa, type: 3}
+  - {fileID: 8300000, guid: 759774c9d4dec4a428581db1cbd2feef, type: 3}
+  - {fileID: 8300000, guid: e72d9b7edd6a34c4db37b1f558455408, type: 3}

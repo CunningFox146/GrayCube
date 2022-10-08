@@ -42,12 +42,12 @@ namespace GrayCube.Moveable
         private void OnClickPerformedHandler()
         {
             _currentObject = GetMoveableUnderPoint(_inputSource.GetClickPosition());
-            _currentObject?.StartMoving();
+            _currentObject?.OnStartMoving();
         }
 
         private void OnClickCancelledHandler()
         {
-            _currentObject?.StopMoving();
+            _currentObject?.OnStopMoving();
             _currentObject = null;
         }
     }

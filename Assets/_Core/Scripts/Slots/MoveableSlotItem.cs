@@ -38,9 +38,9 @@ namespace GrayCube.Slots
             ItemPutInSlot?.Invoke();
         }
 
-        public override void StopMoving()
+        public override void OnStopMoving()
         {
-            base.StopMoving();
+            base.OnStopMoving();
 
             var slot = _slotsSystem.GetSlotAtPoint(Transform.position);
 
