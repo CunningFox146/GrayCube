@@ -175,6 +175,16 @@ MonoBehaviour:
   _slotPrefab: {fileID: 4406575402992594629, guid: 49928358a59381840baa7de481ed46d9, type: 3}
   _gridSize: {x: 3, y: 3}
   _spacing: 75
+  _startSlotItems:
+  - {fileID: 0}
+  - {fileID: 5594450953795881346, guid: cccb55e9648a93e40ba1d0b8fa15f333, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 5594450953795881346, guid: cccb55e9648a93e40ba1d0b8fa15f333, type: 3}
+  - {fileID: 0}
 --- !u!1 &170408418
 GameObject:
   m_ObjectHideFlags: 0

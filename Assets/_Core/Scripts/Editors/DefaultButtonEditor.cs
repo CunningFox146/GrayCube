@@ -1,7 +1,8 @@
+using GrayCube.UI;
 using UnityEditor;
 using UnityEditor.UI;
 
-namespace GrayCube.UI
+namespace GrayCube.Editors
 {
     [CustomEditor(typeof(DefaultButton))]
     public class DefaultButtonEditor : ButtonEditor

@@ -1,6 +1,8 @@
 ﻿using GrayCube.Slots;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace GrayCube.SlotGridSystem
 {
@@ -13,13 +15,16 @@ namespace GrayCube.SlotGridSystem
         [SerializeField] private Vector2Int _gridSize;
         [SerializeField] private float _spacing = 1f;
 
+        [SerializeField, HideInInspector] private List<GameObject> _startSlotItems = new();
         private Slot[,] _slots;
 
         private RectTransform Transform => transform as RectTransform;
-
+        public Vector2Int GridSize => _gridSize;
+    
         private void Awake()
         {
             InitSlots();
+            //LoadItems();
         }
 
         private void OnDestroy()
@@ -47,6 +52,18 @@ namespace GrayCube.SlotGridSystem
                 }
             }
         }
+
+        //private void LoadItems()
+        //{
+        //    if (StartItems is null) return;
+        //    for (int x = 0; x < _gridSize.x; x++)
+        //    {
+        //        for (int y = 0; y < _gridSize.y; y++)
+        //        {
+        //            var item = StartItems[x, y];
+        //        }
+        //    }
+        //}
 
         private Vector2Int GetSlotIndex(Slot slot)
         {
