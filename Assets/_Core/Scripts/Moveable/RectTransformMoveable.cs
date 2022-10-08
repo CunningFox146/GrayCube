@@ -28,7 +28,7 @@ namespace GrayCube.Moveable
         public virtual void StartMoving()
         {
             _startPos = Transform.anchoredPosition;
-            _targetPos = _startPos;
+            _targetPos = transform.position;
             _isMoving = true;
         }
 

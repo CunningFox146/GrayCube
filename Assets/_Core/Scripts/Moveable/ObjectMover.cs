@@ -26,7 +26,7 @@ namespace GrayCube.Moveable
             var elements = _viewSystem.GetElementsAtPoint(point);
             foreach (RaycastResult element in elements)
             {
-                if (element.gameObject.TryGetComponent(out IMoveable moveable))
+                if (element.gameObject.TryGetComponent(out IMoveable moveable) && moveable.GetIsMoveable())
                 {
                     return moveable;
                 }
