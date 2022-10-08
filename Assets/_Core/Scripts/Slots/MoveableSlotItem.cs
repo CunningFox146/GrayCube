@@ -37,7 +37,7 @@ namespace GrayCube.Slots
         {
             base.StopMoving();
 
-            var slot = _slotsSystem.GetSlotAtPoint(Transform.anchoredPosition);
+            var slot = _slotsSystem.GetSlotAtPoint(Transform.position);
 
             if (slot is not null && !slot.IsFull)
             {

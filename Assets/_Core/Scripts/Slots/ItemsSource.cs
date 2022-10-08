@@ -10,10 +10,11 @@ namespace GrayCube.Slots
         private IObjectPool<ISlotItem> _pool;
         private ISlotItem _currentItem;
 
+        private RectTransform Transform => transform as RectTransform;
+
         private void Awake()
         {
             InitObjectPool();
-
             ReleaseItem();
         }
 
@@ -28,8 +29,7 @@ namespace GrayCube.Slots
 
         private ISlotItem CreateItem()
         {
-            var item = Instantiate(_slotItemPrefab);
-            item.transform.position = transform.position;
+            var item = Instantiate(_slotItemPrefab, Transform);
             return item.GetComponent<ISlotItem>();
         }
 

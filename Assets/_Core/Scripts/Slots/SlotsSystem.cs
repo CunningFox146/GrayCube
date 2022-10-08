@@ -18,11 +18,15 @@ namespace GrayCube.Slots
             _slots.Remove(slot);
         }
 
-        public Slot GetSlotAtPoint(Vector2 pos)
+        public Slot GetSlotAtPoint(Vector3 pos)
         {
+            //Debug.Log(pos);
             foreach (Slot slot in _slots)
             {
-                var distance = ((RectTransform)slot.transform).anchoredPosition - pos;
+
+                //Debug.Log($"[{slot.name}]: {((RectTransform)slot.transform).position}");
+
+                var distance = ((RectTransform)slot.transform).position - pos;
 
                 if (Mathf.Abs(distance.x) <= _slotSize
                     && Mathf.Abs(distance.y) <= _slotSize)
