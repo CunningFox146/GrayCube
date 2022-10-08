@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GrayCube.GameState;
+using GrayCube.Infrastructure;
+using UnityEngine;
 using UnityEngine.Pool;
 
 namespace GrayCube.Slots
@@ -9,13 +11,24 @@ namespace GrayCube.Slots
 
         private IObjectPool<ISlotItem> _pool;
         private ISlotItem _currentItem;
-
+        private IGameState _gameState;
         private RectTransform Transform => transform as RectTransform;
 
         private void Awake()
         {
             InitObjectPool();
             ReleaseItem();
+        }
+
+        private void Start()
+        {
+            _gameState = GameplaySystemsFacade.Instance.GameState;
+            RegisterEventHandlers();
+        }
+
+        private void OnDestroy()
+        {
+            UnregisterEventHandlers();
         }
 
         private void InitObjectPool()
@@ -39,6 +52,23 @@ namespace GrayCube.Slots
             item.ItemPutInSlot += OnItemPutInSlotHandler;
 
             _currentItem = item;
+        }
+
+        private void RegisterEventHandlers()
+        {
+            _gameState.OnGameWon += OnGameEndHandler;
+            _gameState.OnGameLost += OnGameEndHandler;
+        }
+
+        private void UnregisterEventHandlers()
+        {
+            _gameState.OnGameWon -= OnGameEndHandler;
+            _gameState.OnGameLost -= OnGameEndHandler;
+        }
+
+        private void OnGameEndHandler()
+        {
+            gameObject.SetActive(false);
         }
 
         private void OnItemPutInSlotHandler()
