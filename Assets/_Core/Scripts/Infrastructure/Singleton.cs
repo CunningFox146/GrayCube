@@ -10,10 +10,19 @@ namespace GrayCube.Infrastructure
         {
             if (Instance is not null)
             {
+                Debug.Log($"Destroying {gameObject.name}");
                 Destroy(gameObject);
                 return;
             }
             Instance = this as T;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            if (Instance == this as T)
+            {
+                Instance = null;
+            }
         }
     }
 }
