@@ -42,13 +42,17 @@ namespace GrayCube.GameState
         private void Win()
         {
             IsGamePlay = false;
-            Debug.Log("Win");
+            var view = _viewSystem.GetView<GameEndView>();
+            view.SetupWin();
+            _viewSystem.ShowView(view);
         }
 
         private void Loose()
         {
             IsGamePlay = false;
-            Debug.Log("Loose");
+            var view = _viewSystem.GetView<GameEndView>();
+            view.SetupLost();
+            _viewSystem.ShowView(view);
         }
     }
 }
