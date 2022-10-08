@@ -1275,6 +1275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fdb3ea8013ff24bbb6e6a1853c64aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _winSound: {fileID: 11400000, guid: da02ff0206b372c4980228b48cd4e3e0, type: 2}
+  _looseSound: {fileID: 11400000, guid: 472e484e07d71c34a83e25b576ceb13e, type: 2}
 --- !u!4 &1530588425
 Transform:
   m_ObjectHideFlags: 0

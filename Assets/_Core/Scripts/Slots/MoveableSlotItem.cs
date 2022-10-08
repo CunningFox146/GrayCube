@@ -25,7 +25,6 @@ namespace GrayCube.Slots
 
         public void OnCleared()
         {
-            Destroy(gameObject);
             Cleared?.Invoke();
         }
 

@@ -1,11 +1,12 @@
 ﻿using GrayCube.GameState;
 using GrayCube.Infrastructure;
+using GrayCube.Utils;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace GrayCube.Slots
 {
-    public class ItemsSource : MonoBehaviour
+    public class SlotItemsSource : MonoBehaviour
     {
         [SerializeField] private GameObject _slotItemPrefab;
 
@@ -49,7 +50,15 @@ namespace GrayCube.Slots
         private void ReleaseItem()
         {
             var item = _pool.Get();
+
+            void OnItemClearedHandler()
+            {
+                item.Cleared -= OnItemClearedHandler;
+                this.DelayAction(0.5f, () => _pool.Release(item));
+            }
+
             item.ItemPutInSlot += OnItemPutInSlotHandler;
+            item.Cleared += OnItemClearedHandler;
 
             _currentItem = item;
         }
@@ -68,7 +77,7 @@ namespace GrayCube.Slots
 
         private void OnGameEndHandler()
         {
-            gameObject.SetActive(false);
+            ((MonoBehaviour)_currentItem).gameObject.SetActive(false);
         }
 
         private void OnItemPutInSlotHandler()

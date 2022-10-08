@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GrayCube.Slots
 {
     [RequireComponent(typeof(ISlotItem), typeof(IMoveable))]
-    public class SlotItemSfx : MonoBehaviour
+    public class SlotItemSounds : MonoBehaviour
     {
         [SerializeField] private SoundInfo _startMovingSound;
         [SerializeField] private SoundInfo _putInSlotSound;
